@@ -1,4 +1,7 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
-public class Mesa {
+// id = numero da mesa
+// idpedido
+
+public class Mesa extends Entity {
 }
