@@ -1,12 +1,23 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.ArrayList;
 import java.util.List;
 
+@javax.persistence.Entity
 public class ItemsMenu extends Entity{
+    @Column(name = "preco_venda")
     private Double precoVenda;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "situacao")
     private Situacao situacao;
+
     private List<ReceitaItem> itens = new ArrayList<>();
 
     public Double getPrecoVenda() {
