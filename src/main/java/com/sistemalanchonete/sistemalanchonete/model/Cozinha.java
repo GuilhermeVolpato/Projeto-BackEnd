@@ -1,4 +1,4 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
-public class Cozinha {
+public class Cozinha extends Entity{
 }

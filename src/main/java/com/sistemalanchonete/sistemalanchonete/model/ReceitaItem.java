@@ -1,7 +1,30 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
-// Receita para o cozinheiro "mostrando" como se faz o produto
-// ex: 1 salada, 2 fatias de queijo, 1 carne ...
-public class ReceitaItem {
+public class ReceitaItem extends Entity{
+    private ItemsMenu produto;
+    private Ingrediente ingrediente;
+    private Double quantidade;
+    public Ingrediente getIngrediente() {
+        return ingrediente;
+    }
 
+    public ItemsMenu getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ItemsMenu produto) {
+        this.produto = produto;
+    }
+
+    public void setIngrediente(Ingrediente ingrediente) {
+        this.ingrediente = ingrediente;
+    }
+
+    public Double getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Double quantidade) {
+        this.quantidade = quantidade;
+    }
 }
