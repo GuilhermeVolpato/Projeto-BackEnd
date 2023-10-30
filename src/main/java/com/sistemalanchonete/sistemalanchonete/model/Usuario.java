@@ -49,4 +49,5 @@ public class Usuario extends Entity{
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
 }

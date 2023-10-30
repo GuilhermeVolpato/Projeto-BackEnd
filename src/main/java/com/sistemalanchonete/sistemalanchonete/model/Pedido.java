@@ -16,6 +16,8 @@ public class Pedido extends Entity{
     private String rua;
     private String complemento;
     private Mesa mesa;
+    private Atendente atendente;
+
     private List<ItemPedido> itens = new ArrayList<>();
 
     public LocalDate getDataVenda() {
@@ -40,6 +42,18 @@ public class Pedido extends Entity{
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Atendente getAtendente() {
+        return atendente;
+    }
+
+    public void setAtendente(Atendente atendente) {
+        if (atendente.getSituacao() == Situacao.ATIVO) {
+            this.atendente = atendente;
+        } else {
+            throw new RuntimeException("Atendente não está ativo");
+        }
     }
 
     public Status getStatus() {
@@ -115,7 +129,9 @@ public class Pedido extends Entity{
         this.itens.remove(item);
     }
 
+
     public List<ItemPedido> getItens() {
         return itens;
     }
 }
+
