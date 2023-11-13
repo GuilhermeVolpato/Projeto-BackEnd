@@ -1,7 +1,7 @@
 <strong>Quick Demand</strong>
 
 Equipe: Guilherme Chaves Volpato</br>
-        Luiz Otávio Milanezi Vieira</br>
+       Luiz Otávio Milanezi Vieira</br>
         Paulo Simão</br>
         Luiz Miguel Rosso</br>
         Guilherme Marques</br>
