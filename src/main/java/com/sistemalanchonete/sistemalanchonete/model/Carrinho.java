@@ -16,7 +16,6 @@ public class Carrinho extends Entity{
     }
 
     public void addItemCarrinho(ItemCarrinho item) {
-        item.setCarrinho(this);
         this.itens.add(item);
     }
 

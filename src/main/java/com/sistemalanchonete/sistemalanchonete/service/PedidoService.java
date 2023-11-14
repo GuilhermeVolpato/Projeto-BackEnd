@@ -16,10 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
-import java.util.List;
-
 @Service
-public class PeididoService {
+public class PedidoService {
 
     @Autowired
     private PedidoRepository repository;

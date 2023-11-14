@@ -14,9 +14,9 @@ public class ItemsMenu extends Entity{
     @Column(name = "nome")
     private String nome;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "situacao")
-    private Situacao situacao;
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "situacao")
+//    private Situacao situacao;
 
     private List<ReceitaItem> itens = new ArrayList<>();
 
@@ -36,13 +36,13 @@ public class ItemsMenu extends Entity{
         this.nome = nome;
     }
 
-    public Situacao getSituacao() {
-        return situacao;
-    }
-
-    public void setSituacao(Situacao situacao) {
-        this.situacao = situacao;
-    }
+//    public Situacao getSituacao() {
+//        return situacao;
+//    }
+//
+//    public void setSituacao(Situacao situacao) {
+//        this.situacao = situacao;
+//    }
 
     public void addItemReceita(ReceitaItem item) {
         item.setProduto(this);

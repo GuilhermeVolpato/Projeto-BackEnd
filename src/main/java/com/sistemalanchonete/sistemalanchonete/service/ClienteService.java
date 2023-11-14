@@ -1,0 +1,21 @@
+package com.sistemalanchonete.sistemalanchonete.service;
+
+import com.sistemalanchonete.sistemalanchonete.model.Cliente;
+import com.sistemalanchonete.sistemalanchonete.repository.ClienteRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ClienteService {
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private ClienteRepository repository;
+
+    public Cliente salvar( Cliente entity){
+        return repository.save(entity);
+    }
+}

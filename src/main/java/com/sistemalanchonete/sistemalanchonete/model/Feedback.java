@@ -1,6 +1,6 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
-public class Feedback extends Status {
+public class Feedback {
     private String observacao;
 
     public String getObservacao() {
