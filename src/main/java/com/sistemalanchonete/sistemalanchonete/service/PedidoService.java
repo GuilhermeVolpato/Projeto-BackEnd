@@ -6,9 +6,8 @@
 
 package com.sistemalanchonete.sistemalanchonete.service;
 
-import com.sistemalanchonete.sistemalanchonete.model.Atendente;
+import com.sistemalanchonete.sistemalanchonete.model.Funcionario;
 import com.sistemalanchonete.sistemalanchonete.model.Pedido;
-import com.sistemalanchonete.sistemalanchonete.model.Situacao;
 import com.sistemalanchonete.sistemalanchonete.repository.AtendenteRepository;
 import com.sistemalanchonete.sistemalanchonete.repository.ClienteRepository;
 import com.sistemalanchonete.sistemalanchonete.repository.PedidoRepository;
@@ -32,10 +31,10 @@ public class PedidoService {
 
     public Pedido salvar(Pedido pedido) {
 
-        if (pedido.getAtendente() != null && pedido.getAtendente().getId() != null &&
+        if (pedido.getFuncionario() != null && pedido.getFuncionario().getId() != null &&
                 pedido.getCliente() != null && pedido.getCliente().getId() != null) {
-            Atendente atendente = atendenteRepository.findById(pedido.getAtendente().getId()).orElse(null);
-            if (atendente != null && atendente.getSituacao() == Situacao.ATIVO) {
+            Funcionario funcionario = atendenteRepository.findById(pedido.getFuncionario().getId()).orElse(null);
+            if (funcionario != null ) {
                 return repository.save(pedido);
             } else {
                 throw new RuntimeException("Atendente não está ativo ou é inválido");

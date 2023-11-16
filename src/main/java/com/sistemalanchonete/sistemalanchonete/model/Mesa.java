@@ -1,25 +1,53 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
-// id = numero da mesa
-// idpedido
+import javax.persistence.*;
 
+@javax.persistence.Entity
+@Table(name = "Mesas")
 public class Mesa extends Entity {
-    private Integer quantidadePessoas;
-    private Situacao situacao;
 
-    public Integer getQuantidadePessoas() {
-        return quantidadePessoas;
+    @Column(name = "qtde_pessoas", nullable = false)
+    private Long qtdePessoas;
+
+    // Relacionamento com Pedido
+    @ManyToOne
+    @JoinColumn(name = "pedido", nullable = false)
+    private Pedido pedido;
+
+    @Column(name = "status", nullable = false)
+    private Status status;
+
+    public Mesa() {
     }
 
-    public void setQuantidadePessoas(Integer quantidadePessoas) {
-        this.quantidadePessoas = quantidadePessoas;
+    // Construtor com campos
+    public Mesa(Long qtdePessoas, Pedido pedido, Status status) {
+        this.qtdePessoas = qtdePessoas;
+        this.pedido = pedido;
+        this.status = status;
     }
 
-    public Situacao getSituacao() {
-        return situacao;
+    public Long getQtdePessoas() {
+        return qtdePessoas;
     }
 
-    public void setSituacao(Situacao situacao) {
-        this.situacao = situacao;
+    public void setQtdePessoas(Long qtdePessoas) {
+        this.qtdePessoas = qtdePessoas;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

@@ -1,13 +1,42 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.util.Date;
 
-public class Ingrediente extends Entity{
+@javax.persistence.Entity
+@Table(name = "Ingredientes")
+public class Ingrediente extends Entity {
+
+    @Column(name = "nome", nullable = false)
     private String nome;
-    private Integer diasValidade;
-    private Situacao situacao;
+
+    @Column(name = "quantidade_total", nullable = false)
+    private Double quantidadeTotal;
+
+    @Column(name = "quantidade_minima", nullable = false)
+    private Double quantidadeMinima;
+
+    @Column(name = "dt_validade", nullable = false)
+    private Date dtValidade;
+
+    @Column(name = "preço_compra", nullable = false)
     private Double precoCompra;
-    private Double temperaturaEstoque;
+
+    @Column(name = "temperatura_armazenamento", nullable = false)
+    private Double temperaturaArmazenamento;
+
+    public Ingrediente() {
+    }
+
+    // Construtor com campos
+    public Ingrediente(String nome, Double quantidadeTotal, Double quantidadeMinima, Date dtValidade, Double precoCompra, Double temperaturaArmazenamento) {
+        this.nome = nome;
+        this.quantidadeTotal = quantidadeTotal;
+        this.quantidadeMinima = quantidadeMinima;
+        this.dtValidade = dtValidade;
+        this.precoCompra = precoCompra;
+        this.temperaturaArmazenamento = temperaturaArmazenamento;
+    }
 
     public String getNome() {
         return nome;
@@ -17,20 +46,28 @@ public class Ingrediente extends Entity{
         this.nome = nome;
     }
 
-    public Integer getDiasValidade() {
-        return diasValidade;
+    public Double getQuantidadeTotal() {
+        return quantidadeTotal;
     }
 
-    public void setDiasValidade(Integer diasValidade) {
-        this.diasValidade = diasValidade;
+    public void setQuantidadeTotal(Double quantidadeTotal) {
+        this.quantidadeTotal = quantidadeTotal;
     }
 
-    public Situacao getSituacao() {
-        return situacao;
+    public Double getQuantidadeMinima() {
+        return quantidadeMinima;
     }
 
-    public void setSituacao(Situacao situacao) {
-        this.situacao = situacao;
+    public void setQuantidadeMinima(Double quantidadeMinima) {
+        this.quantidadeMinima = quantidadeMinima;
+    }
+
+    public Date getDtValidade() {
+        return dtValidade;
+    }
+
+    public void setDtValidade(Date dtValidade) {
+        this.dtValidade = dtValidade;
     }
 
     public Double getPrecoCompra() {
@@ -41,11 +78,11 @@ public class Ingrediente extends Entity{
         this.precoCompra = precoCompra;
     }
 
-    public Double getTemperaturaEstoque() {
-        return temperaturaEstoque;
+    public Double getTemperaturaArmazenamento() {
+        return temperaturaArmazenamento;
     }
 
-    public void setTemperaturaEstoque(Double temperaturaEstoque) {
-        this.temperaturaEstoque = temperaturaEstoque;
+    public void setTemperaturaArmazenamento(Double temperaturaArmazenamento) {
+        this.temperaturaArmazenamento = temperaturaArmazenamento;
     }
 }
