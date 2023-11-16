@@ -14,3 +14,8 @@ Guilherme Chaves Volpato</br>
 #### Obs
 
 Projeto passando por reescrita e refatoraçao, a branch atual se chama refactor, no momento a main está desatualizado!!
+
+
+### Estrutura BD
+
+https://drawsql.app/teams/backend-54/diagrams/backend-refactor
