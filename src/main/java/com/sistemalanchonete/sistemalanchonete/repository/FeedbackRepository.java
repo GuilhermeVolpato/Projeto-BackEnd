@@ -6,5 +6,5 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FeedbackRepository extends JpaRepository<observacao, String>, QuerydslPredicateExecutor<Feedback> {
+public interface FeedbackRepository extends JpaRepository<Feedback, String>, QuerydslPredicateExecutor<Feedback> {
 }

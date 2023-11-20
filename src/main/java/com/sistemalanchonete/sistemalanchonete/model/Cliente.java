@@ -1,31 +1,47 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
-public class Cliente extends Usuario{
-    private String cpf;
-    private String rg;
-    private String cep;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-    public String getCpf() {
-        return cpf;
+@Entity
+@Table(name = "Cliente")
+public class Cliente extends Usuario {
+
+    @JoinColumn(name = "endereco_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> enderecos;
+
+    public Cliente() {
+        super();
+        this.enderecos = new ArrayList<>(); // Initialize the list
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public Cliente(String nome, String cpf, String telefone, String email, String senha, Endereco endereco, Date dtNascimento) {
+        super(nome, cpf, telefone, email, senha);
+        this.enderecos = new ArrayList<>(List.of(endereco));
     }
 
-    public String getRg() {
-        return rg;
+    private String formatarEnderecos() {
+        if (enderecos != null && !enderecos.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (Endereco endereco : enderecos) {
+                sb.append(endereco.toString()).append("; ");
+            }
+            return sb.toString();
+        }
+        return "Sem endereços";
     }
 
-    public void setRg(String rg) {
-        this.rg = rg;
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
+    // Correção aqui - utilize um método específico para setar os endereços
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 }
+

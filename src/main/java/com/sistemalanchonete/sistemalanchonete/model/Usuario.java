@@ -1,14 +1,43 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
-import javax.xml.crypto.Data;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
+@MappedSuperclass
 public class Usuario extends Entity{
     private String nome;
     private String telefone;
     private String email;
-    private String endereco;
     private Date dataNascimento;
+    @Column(name = "cpf", nullable = false)
+    private String cpf;
+    @Column(name = "rg", nullable = true)
+    private String rg;
+
+    public Usuario(String nome, String cpf, String telefone, String email, String senha) {
+        super();
+    }
+
+    public Usuario() {
+        super();
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
 
     public String getNome() {
         return nome;
@@ -34,14 +63,6 @@ public class Usuario extends Entity{
         this.email = email;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
     public Date getDataNascimento() {
         return dataNascimento;
     }
@@ -49,5 +70,7 @@ public class Usuario extends Entity{
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+
 
 }
