@@ -9,7 +9,6 @@ public class Usuario extends Entity{
     private String nome;
     private String telefone;
     private String email;
-    private String endereco;
     private Date dataNascimento;
     @Column(name = "cpf", nullable = false)
     private String cpf;
@@ -62,14 +61,6 @@ public class Usuario extends Entity{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public Date getDataNascimento() {

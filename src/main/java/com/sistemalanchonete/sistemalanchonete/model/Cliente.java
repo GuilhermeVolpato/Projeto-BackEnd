@@ -10,12 +10,9 @@ import java.util.List;
 @Table(name = "Cliente")
 public class Cliente extends Usuario {
 
-    // Relacionamento com Endereco
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos;
-
-    @Column(name = "dt_nascimento", nullable = false)
-    private Date dtNascimento;
 
     public Cliente() {
         super();
@@ -25,14 +22,6 @@ public class Cliente extends Usuario {
     public Cliente(String nome, String cpf, String telefone, String email, String senha, Endereco endereco, Date dtNascimento) {
         super(nome, cpf, telefone, email, senha);
         this.enderecos = new ArrayList<>(List.of(endereco));
-        endereco.setCliente(this); // Configurar a propriedade cliente no endereço
-        this.dtNascimento = dtNascimento;
-    }
-
-    @Override
-    public String getEndereco() {
-
-        return this.enderecos.toString();
     }
 
     private String formatarEnderecos() {
@@ -53,14 +42,6 @@ public class Cliente extends Usuario {
     // Correção aqui - utilize um método específico para setar os endereços
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
-    }
-
-    public Date getDtNascimento() {
-        return dtNascimento;
-    }
-
-    public void setDtNascimento(Date dtNascimento) {
-        this.dtNascimento = dtNascimento;
     }
 }
 

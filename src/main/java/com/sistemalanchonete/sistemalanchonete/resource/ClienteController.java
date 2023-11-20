@@ -24,14 +24,9 @@ public class ClienteController extends AbstractController {
     public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
         // Certifique-se de que os endereços estão associados ao cliente
         List<Endereco> enderecos = cliente.getEnderecos();
-        if (enderecos != null) {
-            for (Endereco endereco : enderecos) {
-                endereco.setCliente(cliente);
-            }
-        }
-
         Cliente novoCliente = service.salvar(cliente);
         return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
     }
+
 
 }

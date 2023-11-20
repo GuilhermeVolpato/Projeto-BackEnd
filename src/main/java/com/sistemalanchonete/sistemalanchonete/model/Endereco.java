@@ -27,10 +27,6 @@ public class Endereco extends Entity {
     @Column(name = "complemento", nullable = false)
     private String complemento;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
-
     // Construtores, getters e setters
 
     // Exemplo de construtor vazio para JPA
@@ -46,7 +42,6 @@ public class Endereco extends Entity {
         this.bairro = bairro;
         this.numero = numero;
         this.complemento = complemento;
-        this.cliente = cliente;
     }
 
     public String getRua() {
@@ -105,11 +100,4 @@ public class Endereco extends Entity {
         this.complemento = complemento;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 }
