@@ -27,9 +27,8 @@ public class Endereco extends Entity {
     @Column(name = "complemento", nullable = false)
     private String complemento;
 
-    // Relacionamento com Cliente
     @ManyToOne
-    @JoinColumn(name = "Cliente", nullable = false)
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
     // Construtores, getters e setters

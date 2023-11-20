@@ -13,16 +13,12 @@ import com.sistemalanchonete.sistemalanchonete.repository.ClienteRepository;
 import com.sistemalanchonete.sistemalanchonete.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
 
 @Service
 public class PedidoService {
 
     @Autowired
     private PedidoRepository repository;
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Autowired
     private AtendenteRepository atendenteRepository;
