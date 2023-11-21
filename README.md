@@ -1,6 +1,6 @@
-<strong>Quick Demand</strong>
+# Quick Demand
 
-##### Equipe: 
+### Equipe: 
 
 Guilherme Chaves Volpato</br>
        Luiz Otávio Milanezi Vieira</br>
@@ -11,6 +11,14 @@ Guilherme Chaves Volpato</br>
         Vitor Henrique
        
 
-### Estrutura BD
+### Banco de dados
 
+###### Diagrama
 https://drawsql.app/teams/backend-54/diagrams/backend-refactor
+
+###### Gerenciador de banco 
+PostgreSQL
+
+
+### Tecnologias
+Java, Spring Boot, JPA
