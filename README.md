@@ -9,12 +9,7 @@ Guilherme Chaves Volpato</br>
         Guilherme Marques</br>
         Yuri Damin</br>
         Vitor Henrique
-
-
-#### Obs
-
-Projeto passando por reescrita e refatoraçao, a branch atual se chama refactor, no momento a main está desatualizado!!
-
+       
 
 ### Estrutura BD
 
