@@ -50,10 +50,12 @@ public class Pedido extends Entity {
 
 
     public Pedido() {
+        super();
     }
 
     // Construtor com campos
     public Pedido(String nomeClienteLocal, Boolean isPedidoWeb, Double valorTotal, Double valorDesconto, Double valorFinal, String codigoCupom, Long idMesa, MetodoPagamento metodoPagamento, Cliente cliente, Funcionario funcionario, ItemPedido itensCarrinho, Endereco endereco) {
+        super();
         this.nomeClienteLocal = nomeClienteLocal;
         this.isPedidoWeb = isPedidoWeb;
         this.valorTotal = valorTotal;

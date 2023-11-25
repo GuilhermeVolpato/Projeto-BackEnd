@@ -27,6 +27,4 @@ public class ClienteController extends AbstractController {
         Cliente novoCliente = service.salvar(cliente);
         return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
     }
-
-
 }
