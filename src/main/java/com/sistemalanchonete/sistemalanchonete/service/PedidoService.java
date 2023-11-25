@@ -6,6 +6,7 @@
 
 package com.sistemalanchonete.sistemalanchonete.service;
 
+import com.sistemalanchonete.sistemalanchonete.model.Cliente;
 import com.sistemalanchonete.sistemalanchonete.model.Funcionario;
 import com.sistemalanchonete.sistemalanchonete.model.Pedido;
 import com.sistemalanchonete.sistemalanchonete.repository.AtendenteRepository;
@@ -13,6 +14,8 @@ import com.sistemalanchonete.sistemalanchonete.repository.ClienteRepository;
 import com.sistemalanchonete.sistemalanchonete.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PedidoService {
@@ -38,6 +41,19 @@ public class PedidoService {
         } else {
             throw new RuntimeException("ID de Atendente e/ou Cliente inválido(s)");
         }
+    }
+
+    public void verificarRestricoesCliente(Cliente cliente) {
+        List<String> alergiasCliente = cliente.getAlergias();
+        List<String> restricoesAlimentar = cliente.getRestricoesAlimentar();
+
+        if (alergiasCliente.contains("Amendoim")) {
+            System.out.println("Atenção: Cliente tem alergia a amendoim!");
+        }
+        if (restricoesAlimentar.contains("Lactose")) {
+            System.out.println("Atenção: Cliente tem intolerancia a Lactose!");
+        }
+
     }
 }
 
