@@ -104,6 +104,7 @@
 						<configuration>
 							<outputDirectory>target/generated-sources/java</outputDirectory>
 							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+
 						</configuration>
 					</execution>
 				</executions>
