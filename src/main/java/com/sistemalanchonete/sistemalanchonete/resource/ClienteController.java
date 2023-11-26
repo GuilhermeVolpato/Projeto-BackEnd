@@ -26,8 +26,8 @@ public class ClienteController extends AbstractController {
     public ResponseEntity findAll(@RequestParam(required = false) String filter,
                                   @RequestParam(defaultValue = "0") int page,
                                   @RequestParam(defaultValue = "10") int size) {
-        List<Cliente> clientes = clienteService.buscaTodos(filter, PageRequest.of(page, size));
-        List<ClienteDTO> clienteDTOS = ClienteDTO.fromEntity(clientes);
+        Page<Cliente> clientes = clienteService.buscaTodos(filter, PageRequest.of(page, size));
+        Page<ClienteDTO> clienteDTOS = clientes.map(ClienteDTO::fromEntity);
         return ResponseEntity.ok(clienteDTOS);
     }
 
