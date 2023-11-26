@@ -92,6 +92,7 @@ public class Pedido extends Entity {
     }
     } 
 
+    //teste
     // Regra de Negócio: Escolher o Tipo de Entrega
     public void escolherTipoEntrega(String tipo, Endereco endereco) {
         if ("Entrega".equals(tipo)) {

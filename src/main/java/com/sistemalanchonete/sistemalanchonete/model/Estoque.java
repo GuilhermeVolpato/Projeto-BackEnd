@@ -24,7 +24,7 @@ public class Estoque extends Entity {
     public boolean verificarDisponibilidade(Ingrediente ingrediente, int quantidade) {
         return ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade;
     }
-
+     //teste
     // Regra de Negócio: Monitoramento de estoque em tempo real
     public void atualizarQuantidade(Ingrediente ingrediente, int quantidade) {
         if (ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade) {

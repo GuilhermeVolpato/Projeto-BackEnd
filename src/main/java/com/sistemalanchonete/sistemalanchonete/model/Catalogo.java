@@ -29,7 +29,7 @@ public class Catalogo extends Entity {
         // Lógica para ordenar itens por popularidade
     }
 
-
+     //teste
     // Regra de Negócio: Retornar Itens com Base no Estoque
     public List<ItensVenda> obterItensDisponiveis() {
         List<ItensVenda> itensDisponiveis = new ArrayList<>();
