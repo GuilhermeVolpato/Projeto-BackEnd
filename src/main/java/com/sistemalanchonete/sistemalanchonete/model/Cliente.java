@@ -2,7 +2,9 @@ package com.sistemalanchonete.sistemalanchonete.model;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -66,6 +68,14 @@ public class Cliente extends Usuario {
 
     public List<String> getRestricoesAlimentar() {
         return restricoesAlimentar;
+    }
+
+    public boolean isMaiorIdade(){
+        Date data_atual = new Date();
+        Date dt_nascimento = this.getDataNascimento();
+        long idade = ChronoUnit.YEARS.between(dt_nascimento.toInstant(), data_atual.toInstant());
+
+        return (idade >= 18 );
     }
 
     public void setRestricoesAlimentar(List<String> restricoesAlimentar) {
