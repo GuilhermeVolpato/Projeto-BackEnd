@@ -1,10 +1,16 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "Item_pedido")
 public class ItemPedido extends Entity {
+
+    @JoinColumn(name = "ItemVenda_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItensVenda> itensVendas;
 
     // Relacionamento com Itens_venda
     @ManyToOne
@@ -20,14 +26,30 @@ public class ItemPedido extends Entity {
     private Long qtde;
 
     public ItemPedido() {
+        super();
+        this.itensVendas = new ArrayList<>(); // Initialize the list
     }
 
     // Construtor com campos
-    public ItemPedido(ItensVenda item, Pedido pedido, Long qtde) {
-        this.item = item;
-        this.pedido = pedido;
-        this.qtde = qtde;
+    public ItemPedido(ItensVenda item, Pedido pedido, Long qtde,ItensVenda itensVenda) {
+        super(item,pedido,qtde);
+        this.itensVendas = new ArrayList<>(List.of(itensVenda));
     }
+    private String formatarItemVenda() {
+        if (itensVendas != null && !itensVendas.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (ItensVenda itensVenda: itensVendas) {
+                sb.append(itensVenda.toString()).append("; ");
+            }
+            return sb.toString();
+        }
+        return "Sem itens venda";
+    }
+    public List<ItensVenda> getItensvendas() { return itensVendas;
+    }
+    // Correção aqui - utilize um método específico para setar os endereços
+    public void setItensVendas(List<ItensVenda> itensVendas) {this.itensVendas = itensVendas; }
+
 
     public ItensVenda getItem() {
         return item;

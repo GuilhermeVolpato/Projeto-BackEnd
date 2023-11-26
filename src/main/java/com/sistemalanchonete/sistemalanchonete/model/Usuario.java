@@ -15,12 +15,15 @@ public class Usuario extends Entity{
     @Column(name = "rg", nullable = true)
     private String rg;
 
-    public Usuario(String nome, String cpf, String telefone, String email, String senha) {
+    public Usuario() {
         super();
     }
 
-    public Usuario() {
+    public Usuario(String nomeCargo, Integer nivelAcesso) {
         super();
+    }
+
+    public Usuario(String nome, String cpf, String telefone, String email, String senha, Date dtNascimento) {
     }
 
     public String getCpf() {

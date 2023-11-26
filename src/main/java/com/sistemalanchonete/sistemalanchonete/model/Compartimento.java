@@ -13,10 +13,12 @@ public class Compartimento extends Entity {
     private String tipoArmazenamento;
 
     public Compartimento() {
+        super();
     }
 
     // Construtor com campos
     public Compartimento(String nome, String tipoArmazenamento) {
+        super();
         this.nome = nome;
         this.tipoArmazenamento = tipoArmazenamento;
     }

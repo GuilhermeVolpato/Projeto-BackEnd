@@ -21,10 +21,12 @@ public class Feedback extends Entity {
 
     // Exemplo de construtor vazio para JPA
     public Feedback() {
+        super();
     }
 
     // Construtor com campos
     public Feedback(Boolean isAnonimo, String observacao, Cliente cliente) {
+        super();
         this.isAnonimo = isAnonimo;
         this.observacao = observacao;
         this.cliente = cliente;

@@ -18,10 +18,12 @@ public class Mesa extends Entity {
     private Status status;
 
     public Mesa() {
+        super();
     }
 
     // Construtor com campos
     public Mesa(Long qtdePessoas, Pedido pedido, Status status) {
+        super();
         this.qtdePessoas = qtdePessoas;
         this.pedido = pedido;
         this.status = status;

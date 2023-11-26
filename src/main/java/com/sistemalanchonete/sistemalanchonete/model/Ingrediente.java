@@ -1,11 +1,16 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "Ingredientes")
 public class Ingrediente extends Entity {
+    @JoinColumn(name = "estoque_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Estoque> estoques;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -25,18 +30,32 @@ public class Ingrediente extends Entity {
     @Column(name = "temperatura_armazenamento", nullable = false)
     private Double temperaturaArmazenamento;
 
+
+
     public Ingrediente() {
+        super();
+        this.estoques = new ArrayList<>(); // Initialize the list
     }
 
     // Construtor com campos
-    public Ingrediente(String nome, Double quantidadeTotal, Double quantidadeMinima, Date dtValidade, Double precoCompra, Double temperaturaArmazenamento) {
-        this.nome = nome;
-        this.quantidadeTotal = quantidadeTotal;
-        this.quantidadeMinima = quantidadeMinima;
-        this.dtValidade = dtValidade;
-        this.precoCompra = precoCompra;
-        this.temperaturaArmazenamento = temperaturaArmazenamento;
+    public Ingrediente(String nome, Double quantidadeTotal, Double quantidadeMinima, Date dtValidade, Double precoCompra, Double temperaturaArmazenamento, Estoque estoque) {
+        super(nome, quantidadeTotal,quantidadeMinima,dtValidade,precoCompra,temperaturaArmazenamento);
+        this.estoques = new ArrayList<>(List.of(estoque));
     }
+    private String formatarEstoque() {
+        if (estoques != null && !estoques.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (Estoque estoque : estoques) {
+                sb.append(estoque.toString()).append("; ");
+            }
+            return sb.toString();
+        }
+        return "Sem estoque";
+    }
+    public List<Estoque> getEstoque() { return estoques;
+    }
+    // Correção aqui - utilize um método específico para setar os endereços
+    public void setEnderecos(List<Estoque> estoque) {this.estoques = estoque; }
 
     public String getNome() {
         return nome;

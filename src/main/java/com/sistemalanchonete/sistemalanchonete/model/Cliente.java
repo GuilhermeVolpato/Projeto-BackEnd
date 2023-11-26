@@ -20,10 +20,9 @@ public class Cliente extends Usuario {
     }
 
     public Cliente(String nome, String cpf, String telefone, String email, String senha, Endereco endereco, Date dtNascimento) {
-        super(nome, cpf, telefone, email, senha);
+        super(nome,cpf,telefone,email,senha,dtNascimento);
         this.enderecos = new ArrayList<>(List.of(endereco));
     }
-
     private String formatarEnderecos() {
         if (enderecos != null && !enderecos.isEmpty()) {
             StringBuilder sb = new StringBuilder();
@@ -35,11 +34,9 @@ public class Cliente extends Usuario {
         return "Sem endereços";
     }
 
-    public List<Endereco> getEnderecos() {
-        return enderecos;
+    public List<Endereco> getEnderecos() { return enderecos;
     }
 
-    // Correção aqui - utilize um método específico para setar os endereços
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
@@ -70,7 +67,5 @@ public class Cliente extends Usuario {
     public void setRestricoesAlimentar(List<String> restricoesAlimentar) {
         this.restricoesAlimentar = restricoesAlimentar;
     }
-
-
 }
 

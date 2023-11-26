@@ -1,11 +1,15 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "Endereco")
 public class Endereco extends Entity {
-
+    @JoinColumn(name = "cliente_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cliente> clientes;
     @Column(name = "rua", nullable = false)
     private String rua;
 
@@ -31,17 +35,34 @@ public class Endereco extends Entity {
 
     // Exemplo de construtor vazio para JPA
     public Endereco() {
+        super();
+        this.clientes = new ArrayList<>(); // Initialize the list
+    }
+    public Endereco(String rua, String cep, String cidade, String estado, String bairro, String numero, String complemento, Cliente cliente) {
+        super(rua,cep);
+        this.clientes = new ArrayList<>(List.of(cliente));
     }
 
     // Construtor com campos
-    public Endereco(String rua, String cep, String cidade, String estado, String bairro, Long numero, String complemento, Cliente cliente) {
-        this.rua = rua;
-        this.cep = cep;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.bairro = bairro;
-        this.numero = numero;
-        this.complemento = complemento;
+
+    private String formatarCliente() {
+        if (clientes != null && !clientes.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (Cliente cliente : clientes) {
+                sb.append(cliente.toString()).append("; ");
+            }
+            return sb.toString();
+        }
+        return "Sem clientes";
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    // Correção aqui - utilize um método específico para setar os endereços
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
     public String getRua() {
