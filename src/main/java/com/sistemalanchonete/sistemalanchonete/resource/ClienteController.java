@@ -2,8 +2,11 @@ package com.sistemalanchonete.sistemalanchonete.resource;
 
 import com.sistemalanchonete.sistemalanchonete.model.Cliente;
 import com.sistemalanchonete.sistemalanchonete.model.Endereco;
+import com.sistemalanchonete.sistemalanchonete.resource.representation.ClienteDTO;
 import com.sistemalanchonete.sistemalanchonete.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,15 @@ public class ClienteController extends AbstractController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @GetMapping
+    public ResponseEntity findAll(@RequestParam(required = false) String filter,
+                                  @RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "10") int size) {
+        Page<Cliente> clientes = clienteService.buscaTodos(filter, PageRequest.of(page, size));
+        Page<ClienteDTO> clienteDTOS = clientes.map(ClienteDTO::fromEntity);
+        return ResponseEntity.ok(clienteDTOS);
+    }
 
     @PostMapping("/Cadastro")
     public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
