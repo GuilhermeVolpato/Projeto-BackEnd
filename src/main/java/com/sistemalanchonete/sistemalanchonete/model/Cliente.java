@@ -37,7 +37,35 @@ public class Cliente extends Usuario {
     public List<Endereco> getEnderecos() { return enderecos;
     }
 
-    // Correção aqui - utilize um método específico para setar os endereços
-    public void setEnderecos(List<Endereco> enderecos) {this.enderecos = enderecos; }
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+
+    @ElementCollection
+    @CollectionTable(name = "Alergias", joinColumns = @JoinColumn(name = "cliente_id"))
+    @Column(name = "alergia")
+    private List<String> alergias;
+
+    @ElementCollection
+    @CollectionTable(name = "RestricoesAlimentares", joinColumns = @JoinColumn(name = "cliente_id"))
+    @Column(name = "restricao_alimentar")
+    private List<String> restricoesAlimentar;
+
+    public List<String> getAlergias() {
+        return alergias;
+    }
+
+    public void setAlergias(List<String> alergias) {
+        this.alergias = alergias;
+    }
+
+    public List<String> getRestricoesAlimentar() {
+        return restricoesAlimentar;
+    }
+
+    public void setRestricoesAlimentar(List<String> restricoesAlimentar) {
+        this.restricoesAlimentar = restricoesAlimentar;
+    }
 }
 
