@@ -1,30 +1,34 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
 import javax.persistence.*;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "Pedido")
 public class Pedido extends Entity {
 
-    @Column(name = "nome_cliente_local", nullable = false)
+    @Column(name = "nome_cliente_local", nullable = true)
     private String nomeClienteLocal;
 
-    @Column(name = "isPedidoWeb", nullable = false)
+    @Column(name = "is_pedido_web", columnDefinition = "boolean default false")
     private Boolean isPedidoWeb;
 
     @Column(name = "valor_total", nullable = false)
     private Double valorTotal;
 
-    @Column(name = "valor_desconto", nullable = false)
+    @Column(name = "valor_desconto", nullable = true)
     private Double valorDesconto;
 
     @Column(name = "valor_final", nullable = false)
     private Double valorFinal;
 
-    @Column(name = "código_cupom", nullable = false)
+    @Column(name = "código_cupom", nullable = true)
     private String codigoCupom;
 
-    @Column(name = "id_mesa", nullable = false)
+    @Column(name = "id_mesa", nullable = true)
     private Long idMesa;
 
     @Column(name = "metodo_pagto", nullable = false)
@@ -37,24 +41,37 @@ public class Pedido extends Entity {
 
     // Relacionamento com Funcionario
     @ManyToOne
-    @JoinColumn(name = "funcionario", nullable = false)
+    @JoinColumn(name = "funcionario", nullable = true)
     private Funcionario funcionario;
 
     // Relacionamento com Item_pedido
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemPedido> itensCarrinho;
+
     @ManyToOne
-    @JoinColumn(name = "itens_carrinho", nullable = false)
-    private ItemPedido itensCarrinho;
-    @ManyToOne
-    @JoinColumn(name = "endereco_id", nullable = false)
+    @JoinColumn(name = "endereco_id", nullable = true)
     private Endereco endereco;
 
+    @ManyToOne
+    @JoinColumn(name = "mesa", nullable = true)
+    private Mesa mesa;
+
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
 
     public Pedido() {
         super();
+        this.itensCarrinho = new ArrayList<>();
     }
 
     // Construtor com campos
-    public Pedido(String nomeClienteLocal, Boolean isPedidoWeb, Double valorTotal, Double valorDesconto, Double valorFinal, String codigoCupom, Long idMesa, MetodoPagamento metodoPagamento, Cliente cliente, Funcionario funcionario, ItemPedido itensCarrinho, Endereco endereco) {
+    public Pedido(String nomeClienteLocal, Boolean isPedidoWeb, Double valorTotal, Double valorDesconto, Double valorFinal, String codigoCupom, Long idMesa, MetodoPagamento metodoPagamento, Cliente cliente, Funcionario funcionario, Endereco endereco) {
         super();
         this.nomeClienteLocal = nomeClienteLocal;
         this.isPedidoWeb = isPedidoWeb;
@@ -66,13 +83,14 @@ public class Pedido extends Entity {
         this.metodoPagamento = metodoPagamento;
         this.cliente = cliente;
         this.funcionario = funcionario;
-        this.itensCarrinho = itensCarrinho;
         this.endereco = endereco;
+
+        this.itensCarrinho = new ArrayList<>();
     }
 
     // Regra de Negócio: Verificação de Idade para Bebidas
     public void adicionarItem(ItemPedido item) {
-        if (item.getProduto().isBebidaAlcoolica() && cliente.getIdade() < 18) {
+        if (item.getProduto().isBebidaAlcoolica() && !cliente.isMaiorIdade()) {
             throw new IllegalArgumentException("O cliente não possui idade suficiente para comprar bebidas alcoólicas.");
         }
 
@@ -88,9 +106,8 @@ public class Pedido extends Entity {
     }
 
     private double calcularFrete() {
-        // Lógica para calcular o valor do frete
+        return ;
     }
-    } 
 
     // Regra de Negócio: Escolher o Tipo de Entrega
     public void escolherTipoEntrega(String tipo, Endereco endereco) {
@@ -107,7 +124,6 @@ public class Pedido extends Entity {
     }
 
     // Regra de Negócio: Alergias
-    private Cliente cliente;
     private List<String> alergias;
 
     public void adicionarAlergia(String alergia) {
@@ -196,11 +212,13 @@ public class Pedido extends Entity {
         this.funcionario = funcionario;
     }
 
-    public ItemPedido getItensCarrinho() {
+    public List<ItemPedido> getItensCarrinho() {
         return itensCarrinho;
     }
 
-    public void setItensCarrinho(ItemPedido itensCarrinho) {
+
+
+    public void setItensCarrinho(List<ItemPedido> itensCarrinho) {
         this.itensCarrinho = itensCarrinho;
     }
 

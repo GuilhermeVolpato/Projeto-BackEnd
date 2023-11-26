@@ -23,7 +23,7 @@ import java.util.List;
         public ResponseEntity<ItemPedido> create(@RequestBody ItemPedido itemPedido) {
             // Certifique-se de que os endereços estão associados ao cliente
             List<ItensVenda> itensVendas = itemPedido.getItensvendas();
-            ItemPedido novoItemPedido = service.salvar(itemPedido);
+            ItemPedido novoItemPedido = (ItemPedido) service.salvar((List<ItemPedido>) itemPedido);
             return new ResponseEntity<>(novoItemPedido, HttpStatus.CREATED);
         }
     }

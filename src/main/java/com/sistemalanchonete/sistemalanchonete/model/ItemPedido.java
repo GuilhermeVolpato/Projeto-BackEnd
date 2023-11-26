@@ -8,19 +8,22 @@ import java.util.List;
 @Table(name = "Item_pedido")
 public class ItemPedido extends Entity {
 
+    public List<ItensVenda> getItensVendas() {
+        return itensVendas;
+    }
+
     @JoinColumn(name = "ItemVenda_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItensVenda> itensVendas;
 
-    // Relacionamento com Itens_venda
     @ManyToOne
-    @JoinColumn(name = "item", nullable = false)
-    private ItensVenda item;
-
-    // Relacionamento com Pedido
-    @ManyToOne
-    @JoinColumn(name = "pedido", nullable = false)
+    @JoinColumn(name = "pedido_id", nullable = true)
     private Pedido pedido;
+    // Relacionamento com Itens_venda
+
+    @ManyToOne
+    @JoinColumn(name = "item", nullable = true)
+    private ItensVenda item;
 
     @Column(name = "qtde", nullable = false)
     private Long qtde;
@@ -74,4 +77,9 @@ public class ItemPedido extends Entity {
     public void setQtde(Long qtde) {
         this.qtde = qtde;
     }
+
+    public boolean isEmpty() {
+        return itensVendas.isEmpty();
+    }
+
 }

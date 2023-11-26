@@ -8,9 +8,6 @@ import java.util.List;
 @javax.persistence.Entity
 @Table(name = "Itens_venda")
 public class ItensVenda extends Entity {
-    @JoinColumn(name = "ItemPedido_id")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemPedido> itemPedidos;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -32,7 +29,7 @@ public class ItensVenda extends Entity {
     @Column(name = "observacao", nullable = false)
     private String observacao;
 
-    @Column(name = "isOff", nullable = false)
+    @Column(name = "is_off", nullable = true, columnDefinition = "boolean default false")
     private Boolean isOff;
 
     @Column(name = "valor_desconto", nullable = false)
@@ -46,7 +43,6 @@ public class ItensVenda extends Entity {
 
     public ItensVenda() {
         super();
-        this.itemPedidos = new ArrayList<>(); // Initialize the list
     }
 
 
@@ -63,21 +59,7 @@ public class ItensVenda extends Entity {
         this.valorDesconto = valorDesconto;
         this.dtInicioDesconto = dtInicioDesconto;
         this.dtFimDesconto = dtFimDesconto;
-        this.itemPedidos = new ArrayList<>(List.of(itemPedido));  }
-    private String formatarItemPedido() {
-        if (itemPedidos != null && !itemPedidos.isEmpty()) {
-            StringBuilder sb = new StringBuilder();
-            for (ItemPedido itemPedido: itemPedidos) {
-                sb.append(itemPedido.toString()).append("; ");
-            }
-            return sb.toString();
-        }
-        return "Sem itens pedido";
     }
-    public List<ItemPedido> getItemPedidos() { return itemPedidos;
-    }
-    // Correção aqui - utilize um método específico para setar os endereços
-    public void setItemPedidos(List<ItemPedido> itemPedidos) {this.itemPedidos = itemPedidos; }
 
     public String getNome() {
         return nome;
