@@ -70,6 +70,36 @@ public class Pedido extends Entity {
         this.endereco = endereco;
     }
 
+    public void adicionarItem(ItemPedido item) {
+        if (item.getProduto().isBebidaAlcoolica() && cliente.getIdade() < 18) {
+            throw new IllegalArgumentException("O cliente não possui idade suficiente para comprar bebidas alcoólicas.");
+        }
+
+        public double calcularTotalComFrete() {
+            if (valorTotal > 80) {
+                return valorTotal;
+            } else {
+                return valorTotal + calcularFrete();
+            }
+        }
+    
+        private double calcularFrete() {
+        }
+    } 
+
+    public void escolherTipoEntrega(String tipo, Endereco endereco) {
+        if ("Entrega".equals(tipo)) {
+            // Lógica específica para entrega
+            this.endereco = endereco;
+        } else if ("Retirada".equals(tipo)) {
+            // Lógica específica para retirada
+            this.endereco = null; // Pode ser nulo se for retirada
+        } else {
+            throw new IllegalArgumentException("Tipo de entrega inválido.");
+        }
+    }
+}
+
     public String getNomeClienteLocal() {
         return nomeClienteLocal;
     }

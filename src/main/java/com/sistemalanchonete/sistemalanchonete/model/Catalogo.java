@@ -20,6 +20,30 @@ public class Catalogo extends Entity {
     @JoinColumn(name = "itens_venda", nullable = false)
     private ItensVenda itensVenda;
 
+    public List<ItensVenda> obterItensDisponiveis() {
+        List<ItensVenda> itensDisponiveis = new ArrayList<>();
+
+        for (ItensVenda itensVenda : itensVendas) {
+            if (itensVenda.isDisponivelEmEstoque()) {
+                itensDisponiveis.add(itensVenda);
+            }
+        }
+
+        return itensDisponiveis;
+    }
+
+    public List<ItensVenda> obterItensEmPromocao() {
+        List<ItensVenda> itensEmPromocao = new ArrayList<>();
+
+        for (ItensVenda itensVenda : itensVendas) {
+            if (itensVenda.isEmPromocao()) {
+                itensEmPromocao.add(itensVenda);
+            }
+        }
+
+        return itensEmPromocao;
+    }
+
     public Catalogo() {
         super();
         this.itensVendas = new ArrayList<>(); // Initialize the list

@@ -20,6 +20,18 @@ public class Estoque extends Entity {
     @Column(name = "qtde_ingredientes", nullable = false)
     private Long qtdeIngredientes;
 
+    public boolean verificarDisponibilidade(Ingrediente ingrediente, int quantidade) {
+        return ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade;
+    }
+
+    public void atualizarQuantidade(Ingrediente ingrediente, int quantidade) {
+        if (ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade) {
+            ingrediente.setQuantidade(ingrediente.getQuantidade() - quantidade);
+        } else {
+            throw new IllegalArgumentException("Ingrediente não disponível em quantidade suficiente no estoque.");
+        }
+    }
+
     public Estoque() {
         super();
         this.ingredientes = new ArrayList<>(); // Initialize the list
