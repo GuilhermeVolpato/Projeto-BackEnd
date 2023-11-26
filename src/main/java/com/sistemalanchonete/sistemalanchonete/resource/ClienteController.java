@@ -17,14 +17,22 @@ import java.util.List;
 public class ClienteController extends AbstractController {
 
     @Autowired
-    private ClienteService service;
-
+    private ClienteService clienteService;
 
     @PostMapping("/Cadastro")
     public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
-        // Certifique-se de que os endereços estão associados ao cliente
         List<Endereco> enderecos = cliente.getEnderecos();
-        Cliente novoCliente = service.salvar(cliente);
+
+        if (enderecos == null || enderecos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Cliente novoCliente = clienteService.salvar(cliente);
+
+        for (Endereco endereco : enderecos) {
+            endereco.associarCliente(novoCliente);
+        }
+
         return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
     }
 }

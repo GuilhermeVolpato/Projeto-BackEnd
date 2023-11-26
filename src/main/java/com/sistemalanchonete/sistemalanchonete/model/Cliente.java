@@ -10,19 +10,20 @@ import java.util.List;
 @Table(name = "Cliente")
 public class Cliente extends Usuario {
 
-    @JoinColumn(name = "endereco_id")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos;
+
 
     public Cliente() {
         super();
         this.enderecos = new ArrayList<>(); // Initialize the list
     }
 
-    public Cliente(String nome, String cpf, String telefone, String email, String senha, Endereco endereco, Date dtNascimento) {
-        super(nome,cpf,telefone,email,senha,dtNascimento);
+    public Cliente(String nome, String cpf, String telefone, String email, String senha, Date dtNascimento, Endereco endereco) {
+        super(nome, cpf, telefone, email, senha, dtNascimento);
         this.enderecos = new ArrayList<>(List.of(endereco));
     }
+
     private String formatarEnderecos() {
         if (enderecos != null && !enderecos.isEmpty()) {
             StringBuilder sb = new StringBuilder();
@@ -39,6 +40,9 @@ public class Cliente extends Usuario {
 
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
+        for (Endereco endereco : enderecos) {
+            endereco.associarCliente(this);
+        }
     }
 
 
