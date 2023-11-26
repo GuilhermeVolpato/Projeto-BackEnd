@@ -20,10 +20,12 @@ public class Estoque extends Entity {
     @Column(name = "qtde_ingredientes", nullable = false)
     private Long qtdeIngredientes;
 
+    // Regra de Negócio: Verificar disponibilidade com base nos ingredientes
     public boolean verificarDisponibilidade(Ingrediente ingrediente, int quantidade) {
         return ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade;
     }
 
+    // Regra de Negócio: Monitoramento de estoque em tempo real
     public void atualizarQuantidade(Ingrediente ingrediente, int quantidade) {
         if (ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade) {
             ingrediente.setQuantidade(ingrediente.getQuantidade() - quantidade);

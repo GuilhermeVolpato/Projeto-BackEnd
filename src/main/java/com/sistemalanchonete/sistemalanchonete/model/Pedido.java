@@ -70,23 +70,29 @@ public class Pedido extends Entity {
         this.endereco = endereco;
     }
 
+    // Regra de Negócio: Verificação de Idade para Bebidas
     public void adicionarItem(ItemPedido item) {
         if (item.getProduto().isBebidaAlcoolica() && cliente.getIdade() < 18) {
             throw new IllegalArgumentException("O cliente não possui idade suficiente para comprar bebidas alcoólicas.");
         }
 
-        public double calcularTotalComFrete() {
-            if (valorTotal > 80) {
-                return valorTotal;
-            } else {
-                return valorTotal + calcularFrete();
-            }
+    // Regra de Negócio: Calcular Frete Acima de 80 Reais
+    private double total;
+
+    public double calcularTotalComFrete() {
+        if (total > 80) {
+            return total;
+        } else {
+            return total + calcularFrete();
         }
-    
-        private double calcularFrete() {
-        }
+    }
+
+    private double calcularFrete() {
+        // Lógica para calcular o valor do frete
+    }
     } 
 
+    // Regra de Negócio: Escolher o Tipo de Entrega
     public void escolherTipoEntrega(String tipo, Endereco endereco) {
         if ("Entrega".equals(tipo)) {
             // Lógica específica para entrega
@@ -96,9 +102,19 @@ public class Pedido extends Entity {
             this.endereco = null; // Pode ser nulo se for retirada
         } else {
             throw new IllegalArgumentException("Tipo de entrega inválido.");
+         }
         }
     }
-}
+
+    // Regra de Negócio: Alergias
+    private Cliente cliente;
+    private List<String> alergias;
+
+    public void adicionarAlergia(String alergia) {
+        alergias.add(alergia);
+    }
+    
+
 
     public String getNomeClienteLocal() {
         return nomeClienteLocal;

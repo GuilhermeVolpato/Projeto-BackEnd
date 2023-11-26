@@ -19,6 +19,12 @@ public class Feedback extends Entity {
 
     // Construtores, getters e setters
 
+    // Regra de Negócio: Feedback dos Produtos
+    private String comentario;
+    private int avaliacao;
+
+    // Métodos de acesso e manipulação dos atributos
+
     // Exemplo de construtor vazio para JPA
     public Feedback() {
         super();

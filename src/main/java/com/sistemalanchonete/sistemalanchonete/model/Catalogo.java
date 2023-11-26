@@ -20,6 +20,17 @@ public class Catalogo extends Entity {
     @JoinColumn(name = "itens_venda", nullable = false)
     private ItensVenda itensVenda;
 
+
+
+    // Regra de Negócio: Ordenação por popularidade
+    private List<ItemMenu> itens;
+
+    public List<ItemMenu> ordenarPorPopularidade() {
+        // Lógica para ordenar itens por popularidade
+    }
+
+
+    // Regra de Negócio: Retornar Itens com Base no Estoque
     public List<ItensVenda> obterItensDisponiveis() {
         List<ItensVenda> itensDisponiveis = new ArrayList<>();
 
@@ -32,6 +43,7 @@ public class Catalogo extends Entity {
         return itensDisponiveis;
     }
 
+    // Regra de Negócio: Retornar Itens em Promoção
     public List<ItensVenda> obterItensEmPromocao() {
         List<ItensVenda> itensEmPromocao = new ArrayList<>();
 
