@@ -9,8 +9,7 @@ import java.util.List;
 @Table(name = "Funcionario")
 public class Funcionario extends Usuario {
 
-    @JoinColumn(name = "endereco_id")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos;
 
     @Column(name = "nome_cargo", nullable = false)
@@ -46,7 +45,12 @@ public class Funcionario extends Usuario {
     }
 
     // Correção aqui - utilize um método específico para setar os endereços
-    public void setEnderecos(List<Endereco> enderecos) {this.enderecos = enderecos;}
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+        for (Endereco endereco : enderecos) {
+            endereco.associarFuncionario(this);
+        }
+    }
 
     public String getNomeCargo() {
         return nomeCargo;

@@ -15,4 +15,9 @@ public class ClienteService {
     public Cliente salvar( Cliente entity){
         return repository.save(entity);
     }
+
+    public Cliente buscarPorId(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
 }

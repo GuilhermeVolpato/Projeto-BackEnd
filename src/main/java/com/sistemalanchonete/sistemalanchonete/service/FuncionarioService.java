@@ -11,4 +11,8 @@ public class FuncionarioService {
 
     public Funcionario salvar(Funcionario entity){return repository.save(entity);
     }
+
+    public Funcionario buscarPorId(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 }
