@@ -1,4 +1,4 @@
-package com.sistemalanchonete.sistemalanchonete.resource.representation;
+package com.sistemalanchonete.sistemalanchonete.resource;
 
 import com.sistemalanchonete.sistemalanchonete.model.ItemPedido;
 import com.sistemalanchonete.sistemalanchonete.model.ItensVenda;

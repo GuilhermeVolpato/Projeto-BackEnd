@@ -52,7 +52,7 @@ public class Estoque extends Entity {
         }
         return "Sem Ingredientes";
     }
-    public List<Ingrediente> getIngredientes() { return ingredientes;
+    public String getIngredientes() { return ingredientes.toString();
     }
 
     // Correção aqui - utilize um método específico para setar os endereços
@@ -72,15 +72,13 @@ public class Estoque extends Entity {
         return compartimento;
     }
 
-    public void setCompartimento(Compartimento compartimento) {
-        this.compartimento = compartimento;
-    }
+    public static void setCompartimento(Compartimento compartimento) {
+}
 
     public Long getQtdeIngredientes() {
         return qtdeIngredientes;
     }
 
-    public void setQtdeIngredientes(Long qtdeIngredientes) {
-        this.qtdeIngredientes = qtdeIngredientes;
+    public static void setQtdeIngredientes(Long qtdeIngredientes) {
     }
 }
