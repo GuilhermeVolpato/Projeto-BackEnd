@@ -6,7 +6,7 @@ import java.util.Date;
 @MappedSuperclass
 public class Entity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
