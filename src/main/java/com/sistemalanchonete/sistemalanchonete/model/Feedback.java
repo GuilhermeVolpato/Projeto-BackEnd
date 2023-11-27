@@ -12,12 +12,45 @@ public class Feedback extends Entity {
     @Column(name = "observacao", nullable = false)
     private String observacao;
 
-    // Relacionamento com Cliente
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 
-    // Construtores, getters e setters
+    @ManyToOne
+    @JoinColumn(name = "id_pedido", nullable = false)
+    private Pedido pedido;
+
+    public Boolean getAnonimo() {
+        return isAnonimo;
+    }
+
+    public void setAnonimo(Boolean anonimo) {
+        isAnonimo = anonimo;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public int getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(int avaliacao) {
+        this.avaliacao = avaliacao;
+    }
 
      //teste
     // Regra de Negócio: Feedback dos Produtos

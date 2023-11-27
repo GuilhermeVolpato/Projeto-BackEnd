@@ -70,13 +70,13 @@ public class Cliente extends Usuario {
         return restricoesAlimentar;
     }
 
-    public boolean isMaiorIdade(){
-        Date data_atual = new Date();
-        Date dt_nascimento = this.getDataNascimento();
-        long idade = ChronoUnit.YEARS.between(dt_nascimento.toInstant(), data_atual.toInstant());
-
-        return (idade >= 18 );
-    }
+//    public boolean isMaiorIdade(){
+//        Date data_atual = new Date();
+//        Date dt_nascimento = this.getDataNascimento();
+//        long idade = ChronoUnit.YEARS.between(dt_nascimento.toInstant(), data_atual.toInstant());
+//
+//        return (idade >= 18 );
+//    }
 
     public void setRestricoesAlimentar(List<String> restricoesAlimentar) {
         this.restricoesAlimentar = restricoesAlimentar;
