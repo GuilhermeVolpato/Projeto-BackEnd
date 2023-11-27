@@ -1,12 +1,44 @@
 package com.sistemalanchonete.sistemalanchonete.resource.representation;
 
+import com.sistemalanchonete.sistemalanchonete.model.Catalogo;
+import com.sistemalanchonete.sistemalanchonete.model.Cliente;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class CatalogoDTO {
         private Long id;
         private String itens_venda;
         private String itensvendas;
         private String nome;
 
-        public Long getId() {
+    public static CatalogoDTO fromEntity(Catalogo catalogo) {
+        CatalogoDTO dto = new CatalogoDTO();
+        dto.setId(catalogo.getId());
+        dto.setNome(catalogo.getNome());
+        return dto;
+    }
+
+    public Cliente toEntity() {
+        Cliente Cliente = new Cliente();
+        Cliente.setId(this.getId());
+        Cliente.setNome(this.getNome());
+        return Cliente;
+    }
+
+    public static List<CatalogoDTO> fromEntity(List<Catalogo> catalogos) {
+        return catalogos.stream().map(catalogo -> fromEntity(catalogo)).collect(Collectors.toList());
+    }
+
+    public static Page<CatalogoDTO> fromEntity(Page<Catalogo> catalogos) {
+        List<CatalogoDTO> catalogoFind = catalogos.stream().map(catalogo -> fromEntity(catalogo)).collect(Collectors.toList());
+        Page<CatalogoDTO> catalogoDTOS = new PageImpl<>(catalogoFind, catalogos.getPageable(), catalogos.getTotalElements());
+        return catalogoDTOS;
+    }
+
+    public Long getId() {
             return id;
         }
 

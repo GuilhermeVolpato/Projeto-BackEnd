@@ -1,8 +1,6 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "Endereco")
@@ -65,32 +63,28 @@ public class Endereco extends Entity {
         return rua;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
+    public static void setRua(String rua) {   }
 
     public String getCep() {
         return cep;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public static void setCep(String cep) {
     }
 
     public String getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public static void setCidade(String cidade) {
+
     }
 
     public String getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public static void setEstado(String estado) {
     }
 
     public String getBairro() {
@@ -105,16 +99,14 @@ public class Endereco extends Entity {
         return numero;
     }
 
-    public void setNumero(Long numero) {
-        this.numero = numero;
+    public static void setNumero(Long numero) {
     }
 
     public String getComplemento() {
         return complemento;
     }
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
+    public static void setComplemento(String complemento) {
     }
 
 }

@@ -3,14 +3,15 @@ package com.sistemalanchonete.sistemalanchonete.resource;
 import com.sistemalanchonete.sistemalanchonete.model.Cliente;
 import com.sistemalanchonete.sistemalanchonete.model.Endereco;
 import com.sistemalanchonete.sistemalanchonete.model.Funcionario;
+import com.sistemalanchonete.sistemalanchonete.resource.representation.ClienteDTO;
+import com.sistemalanchonete.sistemalanchonete.resource.representation.FuncionarioDTO;
 import com.sistemalanchonete.sistemalanchonete.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
@@ -20,6 +21,14 @@ public class FuncionarioController extends AbstractController {
 
         @Autowired
         private FuncionarioService funcionarioService;
+    @GetMapping
+    public ResponseEntity findAll(@RequestParam(required = false) String filter,
+                                  @RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "10") int size) {
+        Page<Funcionario> funcionarios = funcionarioService.buscaTodos(filter, PageRequest.of(page, size));
+        Page<FuncionarioDTO> funcionarioDTOS = funcionarios.map(FuncionarioDTO::fromEntity);
+        return ResponseEntity.ok(funcionarios);
+    }
 
         @PostMapping("/Cadastro")
         public ResponseEntity<Funcionario> create(@RequestBody Funcionario funcionario) {

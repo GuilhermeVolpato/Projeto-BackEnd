@@ -26,7 +26,6 @@ public class Entity {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public static void setId(Long id) {
     }
 }
