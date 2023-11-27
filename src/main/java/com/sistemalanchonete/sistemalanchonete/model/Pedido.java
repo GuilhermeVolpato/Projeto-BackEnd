@@ -1,35 +1,30 @@
 package com.sistemalanchonete.sistemalanchonete.model;
 
 import javax.persistence.*;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "Pedido")
 public class Pedido extends Entity {
 
-    @Column(name = "nome_cliente_local", nullable = true)
+    @Column(name = "nome_cliente_local", nullable = false)
     private String nomeClienteLocal;
 
-    @Column(name = "is_pedido_web", columnDefinition = "boolean default false")
+    @Column(name = "isPedidoWeb", nullable = false)
     private Boolean isPedidoWeb;
 
     @Column(name = "valor_total", nullable = false)
     private Double valorTotal;
 
-    @Column(name = "valor_desconto", nullable = true)
+    @Column(name = "valor_desconto", nullable = false)
     private Double valorDesconto;
 
     @Column(name = "valor_final", nullable = false)
     private Double valorFinal;
 
-    @Column(name = "código_cupom", nullable = true)
+    @Column(name = "código_cupom", nullable = false)
     private String codigoCupom;
-
-    @Column(name = "id_mesa", nullable = true)
-    private Long idMesa;
 
     @Column(name = "metodo_pagto", nullable = false)
     private MetodoPagamento metodoPagamento;
@@ -44,7 +39,6 @@ public class Pedido extends Entity {
     @JoinColumn(name = "funcionario", nullable = true)
     private Funcionario funcionario;
 
-    // Relacionamento com Item_pedido
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itensCarrinho;
 
@@ -71,7 +65,7 @@ public class Pedido extends Entity {
     }
 
     // Construtor com campos
-    public Pedido(String nomeClienteLocal, Boolean isPedidoWeb, Double valorTotal, Double valorDesconto, Double valorFinal, String codigoCupom, Long idMesa, MetodoPagamento metodoPagamento, Cliente cliente, Funcionario funcionario, Endereco endereco) {
+    public Pedido(String nomeClienteLocal, Boolean isPedidoWeb, Double valorTotal, Double valorDesconto, Double valorFinal, String codigoCupom, MetodoPagamento metodoPagamento, Cliente cliente, Funcionario funcionario, Endereco endereco) {
         super();
         this.nomeClienteLocal = nomeClienteLocal;
         this.isPedidoWeb = isPedidoWeb;
@@ -79,7 +73,6 @@ public class Pedido extends Entity {
         this.valorDesconto = valorDesconto;
         this.valorFinal = valorFinal;
         this.codigoCupom = codigoCupom;
-        this.idMesa = idMesa;
         this.metodoPagamento = metodoPagamento;
         this.cliente = cliente;
         this.funcionario = funcionario;
@@ -89,48 +82,49 @@ public class Pedido extends Entity {
     }
 
     // Regra de Negócio: Verificação de Idade para Bebidas
-    public void adicionarItem(ItemPedido item) {
-        if (item.getProduto().isBebidaAlcoolica() && !cliente.isMaiorIdade()) {
-            throw new IllegalArgumentException("O cliente não possui idade suficiente para comprar bebidas alcoólicas.");
-        }
+//    public void adicionarItem(ItemPedido item) {
+//        if (item.getProduto().isBebidaAlcoolica() && cliente.getIdade() < 18) {
+//            throw new IllegalArgumentException("O cliente não possui idade suficiente para comprar bebidas alcoólicas.");
+//        }
+//    }
 
     // Regra de Negócio: Calcular Frete Acima de 80 Reais
-    private double total;
-
-    public double calcularTotalComFrete() {
-        if (total > 80) {
-            return total;
-        } else {
-            return total + calcularFrete();
-        }
-    }
-
-    private double calcularFrete() {
-        return ;
-    }
-
-    //teste
-    // Regra de Negócio: Escolher o Tipo de Entrega
-    public void escolherTipoEntrega(String tipo, Endereco endereco) {
-        if ("Entrega".equals(tipo)) {
-            // Lógica específica para entrega
-            this.endereco = endereco;
-        } else if ("Retirada".equals(tipo)) {
-            // Lógica específica para retirada
-            this.endereco = null; // Pode ser nulo se for retirada
-        } else {
-            throw new IllegalArgumentException("Tipo de entrega inválido.");
-         }
-        }
-    }
-
-    // Regra de Negócio: Alergias
-    private List<String> alergias;
-
-    public void adicionarAlergia(String alergia) {
-        alergias.add(alergia);
-    }
-    
+//    private double total;
+//
+//    public double calcularTotalComFrete() {
+//        if (total > 80) {
+//            return total;
+//        } else {
+//            return total + calcularFrete();
+//        }
+//    }
+//
+//    private double calcularFrete() {
+//        // Lógica para calcular o valor do frete
+//    }
+//
+//    // Regra de Negócio: Escolher o Tipo de Entrega
+//    public void escolherTipoEntrega(String tipo, Endereco endereco) {
+//        if ("Entrega".equals(tipo)) {
+//            // Lógica específica para entrega
+//            this.endereco = endereco;
+//        } else if ("Retirada".equals(tipo)) {
+//            // Lógica específica para retirada
+//            this.endereco = null; // Pode ser nulo se for retirada
+//        } else {
+//            throw new IllegalArgumentException("Tipo de entrega inválido.");
+//         }
+//        }
+//    }
+//
+//    // Regra de Negócio: Alergias
+//    private Cliente cliente;
+//    private List<String> alergias;
+//
+//    public void adicionarAlergia(String alergia) {
+//        alergias.add(alergia);
+//    }
+//
 
 
     public String getNomeClienteLocal() {
@@ -181,13 +175,6 @@ public class Pedido extends Entity {
         this.codigoCupom = codigoCupom;
     }
 
-    public Long getIdMesa() {
-        return idMesa;
-    }
-
-    public void setIdMesa(Long idMesa) {
-        this.idMesa = idMesa;
-    }
 
     public MetodoPagamento getMetodoPagamento() {
         return metodoPagamento;
@@ -217,8 +204,6 @@ public class Pedido extends Entity {
         return itensCarrinho;
     }
 
-
-
     public void setItensCarrinho(List<ItemPedido> itensCarrinho) {
         this.itensCarrinho = itensCarrinho;
     }
@@ -230,4 +215,6 @@ public class Pedido extends Entity {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+
 }

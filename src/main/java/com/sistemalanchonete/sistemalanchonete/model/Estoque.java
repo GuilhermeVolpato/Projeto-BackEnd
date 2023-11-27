@@ -21,18 +21,18 @@ public class Estoque extends Entity {
     private Long qtdeIngredientes;
 
     // Regra de Negócio: Verificar disponibilidade com base nos ingredientes
-    public boolean verificarDisponibilidade(Ingrediente ingrediente, int quantidade) {
-        return ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade;
-    }
-     //teste
-    // Regra de Negócio: Monitoramento de estoque em tempo real
-    public void atualizarQuantidade(Ingrediente ingrediente, int quantidade) {
-        if (ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade) {
-            ingrediente.setQuantidade(ingrediente.getQuantidade() - quantidade);
-        } else {
-            throw new IllegalArgumentException("Ingrediente não disponível em quantidade suficiente no estoque.");
-        }
-    }
+//    public boolean verificarDisponibilidade(Ingrediente ingrediente, int quantidade) {
+//        return ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade;
+//    }
+//     //teste
+//    // Regra de Negócio: Monitoramento de estoque em tempo real
+//    public void atualizarQuantidade(Ingrediente ingrediente, int quantidade) {
+//        if (ingredientes.contains(ingrediente) && ingrediente.getQuantidade() >= quantidade) {
+//            ingrediente.setQuantidade(ingrediente.getQuantidade() - quantidade);
+//        } else {
+//            throw new IllegalArgumentException("Ingrediente não disponível em quantidade suficiente no estoque.");
+//        }
+//    }
 
     public Estoque() {
         super();

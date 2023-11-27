@@ -23,38 +23,38 @@ public class Catalogo extends Entity {
 
 
     // Regra de Negócio: Ordenação por popularidade
-    private List<ItemMenu> itens;
-
-    public List<ItemMenu> ordenarPorPopularidade() {
-        // Lógica para ordenar itens por popularidade
-    }
-
-     //teste
-    // Regra de Negócio: Retornar Itens com Base no Estoque
-    public List<ItensVenda> obterItensDisponiveis() {
-        List<ItensVenda> itensDisponiveis = new ArrayList<>();
-
-        for (ItensVenda itensVenda : itensVendas) {
-            if (itensVenda.isDisponivelEmEstoque()) {
-                itensDisponiveis.add(itensVenda);
-            }
-        }
-
-        return itensDisponiveis;
-    }
+//    private List<ItemMenu> itens;
+//
+//    public List<ItemMenu> ordenarPorPopularidade() {
+//        // Lógica para ordenar itens por popularidade
+//    }
+//
+//     //teste
+//    // Regra de Negócio: Retornar Itens com Base no Estoque
+//    public List<ItensVenda> obterItensDisponiveis() {
+//        List<ItensVenda> itensDisponiveis = new ArrayList<>();
+//
+//        for (ItensVenda itensVenda : itensVendas) {
+//            if (itensVenda.isDisponivelEmEstoque()) {
+//                itensDisponiveis.add(itensVenda);
+//            }
+//        }
+//
+//        return itensDisponiveis;
+//    }
 
     // Regra de Negócio: Retornar Itens em Promoção
-    public List<ItensVenda> obterItensEmPromocao() {
-        List<ItensVenda> itensEmPromocao = new ArrayList<>();
-
-        for (ItensVenda itensVenda : itensVendas) {
-            if (itensVenda.isEmPromocao()) {
-                itensEmPromocao.add(itensVenda);
-            }
-        }
-
-        return itensEmPromocao;
-    }
+//    public List<ItensVenda> obterItensEmPromocao() {
+//        List<ItensVenda> itensEmPromocao = new ArrayList<>();
+//
+//        for (ItensVenda itensVenda : itensVendas) {
+//            if (itensVenda.isEmPromocao()) {
+//                itensEmPromocao.add(itensVenda);
+//            }
+//        }
+//
+//        return itensEmPromocao;
+//    }
 
     public Catalogo() {
         super();
