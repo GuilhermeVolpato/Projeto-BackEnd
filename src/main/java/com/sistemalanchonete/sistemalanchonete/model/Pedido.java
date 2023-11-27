@@ -29,6 +29,9 @@ public class Pedido extends Entity {
     @Column(name = "metodo_pagto", nullable = false)
     private MetodoPagamento metodoPagamento;
 
+    @Column(name = "tipo_entega")
+    private Entrega tipoEntrega;
+
     // Relacionamento com Cliente
     @ManyToOne
     @JoinColumn(name = "cliente", nullable = false)
@@ -43,7 +46,7 @@ public class Pedido extends Entity {
     private List<ItemPedido> itensCarrinho;
 
     @ManyToOne
-    @JoinColumn(name = "endereco_id", nullable = true)
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
     @ManyToOne
@@ -104,18 +107,6 @@ public class Pedido extends Entity {
 //    }
 //
 //    // Regra de Negócio: Escolher o Tipo de Entrega
-//    public void escolherTipoEntrega(String tipo, Endereco endereco) {
-//        if ("Entrega".equals(tipo)) {
-//            // Lógica específica para entrega
-//            this.endereco = endereco;
-//        } else if ("Retirada".equals(tipo)) {
-//            // Lógica específica para retirada
-//            this.endereco = null; // Pode ser nulo se for retirada
-//        } else {
-//            throw new IllegalArgumentException("Tipo de entrega inválido.");
-//         }
-//        }
-//    }
 //
 //    // Regra de Negócio: Alergias
 //    private Cliente cliente;
@@ -216,5 +207,11 @@ public class Pedido extends Entity {
         this.endereco = endereco;
     }
 
+    public Entrega getTipoEntrega() {
+        return tipoEntrega;
+    }
 
+    public void setTipoEntrega(Entrega tipoEntrega) {
+        this.tipoEntrega = tipoEntrega;
+    }
 }

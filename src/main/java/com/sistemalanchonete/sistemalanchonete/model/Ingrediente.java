@@ -21,6 +21,10 @@ public class Ingrediente extends Entity {
     @Column(name = "quantidade_minima", nullable = false)
     private Double quantidadeMinima;
 
+    @Column(name = "quantidade_atual", nullable = false)
+    private Double quantidadeAtual;
+
+
     @Column(name = "dt_validade", nullable = false)
     private Date dtValidade;
 
@@ -104,4 +108,22 @@ public class Ingrediente extends Entity {
     public void setTemperaturaArmazenamento(Double temperaturaArmazenamento) {
         this.temperaturaArmazenamento = temperaturaArmazenamento;
     }
+
+    public List<Estoque> getEstoques() {
+        return estoques;
+    }
+
+    public void setEstoques(List<Estoque> estoques) {
+        this.estoques = estoques;
+    }
+
+    public Double getQuantidadeAtual() {
+        return quantidadeAtual;
+    }
+
+    public void setQuantidadeAtual(Double quantidadeAtual) {
+        this.quantidadeAtual = quantidadeAtual;
+    }
+
+
 }

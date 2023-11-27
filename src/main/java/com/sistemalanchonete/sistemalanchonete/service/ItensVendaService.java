@@ -13,4 +13,5 @@ public class ItensVendaService {
     private ItensVendaRepository repository;
 
     public ItensVenda salvar(ItensVenda entity){return repository.save(entity); }
+
 }

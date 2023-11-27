@@ -6,16 +6,15 @@
 
 package com.sistemalanchonete.sistemalanchonete.service;
 
-import com.sistemalanchonete.sistemalanchonete.model.Cliente;
-import com.sistemalanchonete.sistemalanchonete.model.Funcionario;
-import com.sistemalanchonete.sistemalanchonete.model.ItemPedido;
-import com.sistemalanchonete.sistemalanchonete.model.Pedido;
+import com.sistemalanchonete.sistemalanchonete.model.*;
 import com.sistemalanchonete.sistemalanchonete.repository.AtendenteRepository;
 import com.sistemalanchonete.sistemalanchonete.repository.ClienteRepository;
 import com.sistemalanchonete.sistemalanchonete.repository.PedidoRepository;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,6 +41,12 @@ public class PedidoService {
 
 
     public Pedido criarPedidoLocal(Pedido pedido) {
+        ItemPedido itemPedido = new ItemPedido();
+        itemPedido.setPedido(pedido);
+
+        if (itemPedido.getQtde() == null) {
+            itemPedido.setQtde(1L);
+        }
 
         if (pedido.getCliente() != null && pedido.getCliente().getId() != null) {
             pedido.setCliente(clienteService.buscarPorId(pedido.getCliente().getId()));
@@ -55,35 +60,39 @@ public class PedidoService {
             pedido.setMesa(mesaService.buscarPorId(pedido.getMesa().getId()));
         }
 
-        if(pedido.getPedidoWeb() == null){
+        if (pedido.getPedidoWeb() == null) {
             pedido.setPedidoWeb(false);
         }
 
-
-        pedido = repository.save(pedido);
-
-
-        ItemPedido itemPedido = new ItemPedido();
-        itemPedido.setPedido(pedido);
-        if(itemPedido.getQtde() == null){
-            itemPedido.setQtde(1L);
-        }
-        itemPedidoService.salvar(Collections.singletonList(itemPedido));
-
-        return pedido;
-    }
-
-    public void verificarRestricoesCliente(Cliente cliente) {
-        List<String> alergiasCliente = cliente.getAlergias();
-        List<String> restricoesAlimentar = cliente.getRestricoesAlimentar();
-
-        if (alergiasCliente.contains("Amendoim")) {
-            System.out.println("Atenção: Cliente tem alergia a amendoim!");
-        }
-        if (restricoesAlimentar.contains("Lactose")) {
-            System.out.println("Atenção: Cliente tem intolerancia a Lactose!");
+        // Os clientes podem escolher entre retirar pessoalmente ou receber a entrega em um endereço específico.
+        if (pedido.getTipoEntrega().equals(Entrega.ENTREGA)) {
+            pedido.getCliente().getEnderecos().add(pedido.getEndereco());
+            pedido.setEndereco(pedido.getEndereco());
+            System.out.println("Pedido de entrega");
+        } else if (pedido.getTipoEntrega().equals(Entrega.RETIRADA)) {
+            pedido.setEndereco(null);
         }
 
-    }
+
+//        if (itemPedido.getItem() != null && itemPedido.getItem().getIngredientes() != null) {
+//
+//            Ingrediente ingrediente = itemPedido.getItem().getIngredientes();
+//            System.out.println(ingrediente.getQuantidadeAtual());
+//            if (ingrediente.getQuantidadeAtual() == 0) {
+//                throw new IllegalArgumentException("Ingrediente não disponível em quantidade suficiente no estoque.");
+//            }
+//        }
+
+            if(pedido.getCliente().getAlergias() !=  null){
+                System.out.println("Cliente possui alergias");
+            }
+
+            pedido = repository.save(pedido);
+
+            itemPedidoService.salvar(Collections.singletonList(itemPedido));
+
+            return pedido;
+        }
 }
+
 
