@@ -22,3 +22,6 @@ PostgreSQL
 
 ### Tecnologias
 Java, Spring Boot, JPA
+
+### Figma
+https://www.figma.com/file/lhdIJY3ARUuyNirUBQmCYP/QuickDemand?type=design&node-id=0%3A1&mode=design&t=PrxYCHcfesreJswR-1,
