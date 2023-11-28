@@ -87,6 +87,14 @@ public class PedidoService {
                 System.out.println("Cliente possui alergias");
             }
 
+            Double valorTotalPedido;
+            if(pedido.getValorDesconto() >= 1){
+                valorTotalPedido = pedido.getValorTotal() - pedido.getValorDesconto();
+            }else{
+                valorTotalPedido = pedido.getValorTotal();
+            }
+
+            pedido.setValorFinal(valorTotalPedido);
             pedido = repository.save(pedido);
 
             itemPedidoService.salvar(Collections.singletonList(itemPedido));
